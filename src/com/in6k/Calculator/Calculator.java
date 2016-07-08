@@ -42,14 +42,15 @@ public class Calculator {
         int result = 0;
         for (int i = 0; i < operands.size(); i++) {
             if (operands.get(i) >= 0) {
-                result += operands.get(i);
+                if (operands.get(i) <1000)
+                    result += operands.get(i);
             } else {
-                exceptionMessageIndexes += (i + 1)  + " ";
-                exceptionMessageValues += operands.get(i) + " " ;
+                exceptionMessageIndexes += (i + 1) + " ";
+                exceptionMessageValues += operands.get(i) + " ";
             }
         }
 
-        if (exceptionMessageIndexes.length()>0) {
+        if (exceptionMessageIndexes.length() > 0) {
             throw new Exception("Negatives not allowed! Negative number is " + exceptionMessageValues + "at position " + exceptionMessageIndexes);
         }
 

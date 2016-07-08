@@ -22,26 +22,6 @@ import static org.junit.Assert.assertThat;
  */
 public class TestCalculator {
 
-    @Test (expected = Exception.class)
-    public void tryWithOneNegativeNumber() throws Exception {
-        assertEquals(Calculator.add("1,-2,3,4"), 7);
-    }
-
-    @Test (expected = Exception.class)
-    public void tryWithTwoNegativeNumbers() throws Exception {
-        assertEquals(Calculator.add("1,-2,3,-4"), 4);
-    }
-
-    @Test
-    public void checkExceptionMessageWithTwoNegativeNumbers() throws Exception {
-        try {
-        Calculator.add("1,-2,3,-4");
-        }
-        catch (Exception e)
-        {
-            assertEquals(e.getMessage(),"Negatives not allowed! Negative number is -2 -4 at position 2 4 ");
-        }
-    }
 
     @Test
     public void tryAddWithEmptyString() throws Exception {
@@ -93,5 +73,28 @@ public class TestCalculator {
         assertEquals(Calculator.add("//;\n1;2,3\n4"), 10);
     }
 
+    @Test(expected = Exception.class)
+    public void tryWithOneNegativeNumber() throws Exception {
+        assertEquals(Calculator.add("1,-2,3,4"), 7);
+    }
+
+    @Test(expected = Exception.class)
+    public void tryWithTwoNegativeNumbers() throws Exception {
+        assertEquals(Calculator.add("1,-2,3,-4"), 4);
+    }
+
+    @Test
+    public void checkExceptionMessageWithTwoNegativeNumbers() throws Exception {
+        try {
+            Calculator.add("1,-2,3,-4");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Negatives not allowed! Negative number is -2 -4 at position 2 4 ");
+        }
+    }
+
+    @Test
+    public void isNumbersMoreThan1000() throws Exception {
+        assertEquals(Calculator.add("1,1000,2,1001,999"), 1002);
+    }
 
 }
