@@ -1,19 +1,17 @@
 package com.in6k.Calculator;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
- * Allow the Add method to handle new lines between numbers (instead of commas).
- * The following input is ok: “1\n2,3” (will equal 6)
- * <p>
  * Support different delimiters
  * To change a delimiter, the beginning of the string will contain a separate line that looks like this:
  * “//[delimiter]\n[numbers…]” for example “//;\n1;2” should return three where the default delimiter is ‘;’ .
- * <p>
  * The first line is optional. All existing scenarios should still be supported
+ * <p>
  * Calling Add with a negative number will throw an exception “negatives not allowed” – and the negative that was passed.
  * If there are multiple negatives, show all of them in the exception message stop here if you are a beginner.
  * <p>
@@ -23,6 +21,20 @@ import static org.junit.Assert.assertThat;
  * Make sure you can also handle multiple delimiters with length longer than one char
  */
 public class TestCalculator {
+
+    @Test
+    public void tryWithCustomDelimeterOnly() throws Exception {
+        assertEquals(Calculator.add("//;\n1;2;3"), 6);
+    }
+
+    @Test
+    public void tryWithMixedCustomAndDefaultDelimeters() throws Exception {
+        assertEquals(Calculator.add("//;\n1;2,3\n4"), 10);
+    }
+
+
+
+
 
     @Test
     public void tryAddWithEmptyString() throws Exception {
