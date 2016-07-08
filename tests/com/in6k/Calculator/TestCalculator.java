@@ -6,8 +6,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
- * The method can take 0, 1 or 2 numbers, and will return their sum (for an empty string it will return 0) for example
-   “” or “1” or “1,2”
  * Allow the Add method to handle an unknown amount of numbers
  * Allow the Add method to handle new lines between numbers (instead of commas).
  * The following input is ok: “1\n2,3” (will equal 6)
@@ -39,13 +37,18 @@ public class TestCalculator {
         assertEquals(Calculator.add("1,2"),3);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test
     public void tryAddWithThreeNumbers() throws Exception {
-        Calculator.add("1,2,3");
+        assertEquals(Calculator.add("1,2,3"), 6);
     }
 
     @Test (expected = RuntimeException.class)
     public void tryWithNullValue() throws Exception {
         Calculator.add(null);
+    }
+
+    @Test
+    public void tryWithSevenNumbers() throws Exception {
+        assertEquals(Calculator.add("1,2,3,4,5,6,7"), 28);
     }
 }
