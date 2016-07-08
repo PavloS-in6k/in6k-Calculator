@@ -10,7 +10,7 @@ public class Calculator {
         List<Integer> operands = new ArrayList<>();
 
         if (!numbers.equals("")) {
-            splittedNumbers = numbers.split("\\.?,");
+            splittedNumbers = numbers.split("\\.?[,|\\n]");
             for (int i = 0; i < splittedNumbers.length; i++) {
                 operands.add(Integer.parseInt(splittedNumbers[i]));
             }
