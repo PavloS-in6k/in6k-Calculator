@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    public static int add(String numbers) {
+    public static int add(String numbers) throws Exception {
         String[] splittedNumbers;
         List<Integer> operands = new ArrayList<>();
 
@@ -37,9 +37,20 @@ public class Calculator {
             operands.add(0);
         }
 
+        String exceptionMessageValues = "", exceptionMessageIndexes = "";
+
         int result = 0;
         for (int i = 0; i < operands.size(); i++) {
-            result += operands.get(i);
+            if (operands.get(i) >= 0) {
+                result += operands.get(i);
+            } else {
+                exceptionMessageIndexes += (i + 1)  + " ";
+                exceptionMessageValues += operands.get(i) + " " ;
+            }
+        }
+
+        if (exceptionMessageIndexes.length()>0) {
+            throw new Exception("Negatives not allowed! Negative number is " + exceptionMessageValues + "at position " + exceptionMessageIndexes);
         }
 
         return result;

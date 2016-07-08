@@ -22,19 +22,26 @@ import static org.junit.Assert.assertThat;
  */
 public class TestCalculator {
 
-    @Test
-    public void tryWithCustomDelimeterOnly() throws Exception {
-        assertEquals(Calculator.add("//;\n1;2;3"), 6);
+    @Test (expected = Exception.class)
+    public void tryWithOneNegativeNumber() throws Exception {
+        assertEquals(Calculator.add("1,-2,3,4"), 7);
+    }
+
+    @Test (expected = Exception.class)
+    public void tryWithTwoNegativeNumbers() throws Exception {
+        assertEquals(Calculator.add("1,-2,3,-4"), 4);
     }
 
     @Test
-    public void tryWithMixedCustomAndDefaultDelimeters() throws Exception {
-        assertEquals(Calculator.add("//;\n1;2,3\n4"), 10);
+    public void checkExceptionMessageWithTwoNegativeNumbers() throws Exception {
+        try {
+        Calculator.add("1,-2,3,-4");
+        }
+        catch (Exception e)
+        {
+            assertEquals(e.getMessage(),"Negatives not allowed! Negative number is -2 -4 at position 2 4 ");
+        }
     }
-
-
-
-
 
     @Test
     public void tryAddWithEmptyString() throws Exception {
@@ -75,4 +82,16 @@ public class TestCalculator {
     public void tryWithNewLinesAndComas() throws Exception {
         assertEquals(Calculator.add("1,2\n3,4\n5"), 15);
     }
+
+    @Test
+    public void tryWithCustomDelimeterOnly() throws Exception {
+        assertEquals(Calculator.add("//;\n1;2;3"), 6);
+    }
+
+    @Test
+    public void tryWithMixedCustomAndDefaultDelimeters() throws Exception {
+        assertEquals(Calculator.add("//;\n1;2,3\n4"), 10);
+    }
+
+
 }
